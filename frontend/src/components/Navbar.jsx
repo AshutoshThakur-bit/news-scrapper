@@ -1,32 +1,61 @@
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 
-const Navbar = () =>{
-    return(
-        <nav className="bg-black text-white px-6 py-4 flex justify-between">
-            
-            <Link to="/" className="font-bold text-xl">
-                HN Scraper
-            </Link>
+import { useAuth } from '../context/AuthContext';
 
-            <div className="flex gap-4">
+const Navbar = () => {
 
-                <Link to="/login">
-                 Login
-                </Link>
+  const { user, logout } = useAuth();
 
-                <Link to="/register">
-                 Register
-                </Link>
+  return (
+    <nav className="bg-black text-white px-6 py-4 flex justify-between items-center">
 
-                <Link to="/bookmarks">
-                 Bookmarks
-                </Link>
+      <Link
+        to="/"
+        className="font-bold text-xl"
+      >
+        HN Scraper
+      </Link>
 
 
-            </div>
-        </nav>
-    )
 
-}
+
+
+      <div className="flex gap-4 items-center">
+
+        {
+          user ? (
+            <>
+
+              <Link to="/bookmarks">
+                Bookmarks
+              </Link>
+
+              <button
+                onClick={logout}
+                className="bg-red-500 px-4 py-1 rounded"
+              >
+                Logout
+              </button>
+
+            </>
+          ) : (
+            <>
+
+              <Link to="/login">
+                Login
+              </Link>
+
+              <Link to="/register">
+                Register
+              </Link>
+
+            </>
+          )
+        }
+
+      </div>
+    </nav>
+  );
+};
 
 export default Navbar;

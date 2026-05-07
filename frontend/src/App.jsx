@@ -1,29 +1,56 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import Navbar from './components/Navbar';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Bookmarks from './pages/Bookmarks';
 import NotFound from './pages/NotFound';
-import Navbar from './components/Navbar';
+
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
   return (
     <BrowserRouter>
-    <Navbar/>
+
+      <Navbar />
+
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home />}
+        />
 
-        <Route path="/login" element={<Login />} />
 
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={<Login />}
+        />
 
-        <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route
+          path="/register"
+          element={<Register />}
+        />
 
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/bookmarks"
+          element={
+            <ProtectedRoute>
+              <Bookmarks />
+            </ProtectedRoute>
+          }
+        />
+
+
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
 
       </Routes>
+
     </BrowserRouter>
   );
 }
