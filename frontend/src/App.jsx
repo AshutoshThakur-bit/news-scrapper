@@ -9,6 +9,7 @@ import Bookmarks from './pages/Bookmarks';
 import NotFound from './pages/NotFound';
 
 import ProtectedRoute from './routes/ProtectedRoute';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         />
 
       </Routes>
+      <Footer/>
 
     </BrowserRouter>
   );
