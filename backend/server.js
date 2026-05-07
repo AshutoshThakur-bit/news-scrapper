@@ -1,12 +1,7 @@
-const app = require('./app');
-const mongoose = require('mongoose');
+const scrape = require('./scraper/scraper');
 
 mongoose.connect(process.env.MONGO_URI)
-.then(()=>{
-    console.log("DB Connected");
-    app.listen(process.env.PORT, ()=>{
-        console.log('Server running on ${process.env.PORT}');
-
-    });
-
+.then(async ()=>{
+    await scrape();
+    app.listen(process.env.PORT);
 });
