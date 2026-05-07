@@ -1,13 +1,35 @@
 const express = require('express');
+
 const router = express.Router();
 
-const {getAllStories, getStoryById, toggleBookmark,} = require('../controllers/storyController');
+const {
+  getAllStories,
+  getStoryById,
+  toggleBookmark,
+} = require('../controllers/storyController');
 
-const protect = require('../middleware/authMiddleware');
+const authMiddleware = require('../middleware/authMiddleware');
 
+
+
+
+// GET STORIES
 router.get('/', getAllStories);
-router.get('/:id', getStoryById);
-router.get('/:id/bookmark', protect, toggleBookmark);
 
+
+
+
+// GET SINGLE STORY
+router.get('/:id', getStoryById);
+
+
+
+
+// BOOKMARK
+router.post(
+  '/:id/bookmark',
+  authMiddleware,
+  toggleBookmark
+);
 
 module.exports = router;

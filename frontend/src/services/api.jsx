@@ -1,19 +1,27 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL:  process.env.REACT_APP_API_URL ||
-  'http://localhost:5000/api',
+  baseURL:
+    import.meta.env.VITE_API_URL ||
+    'http://localhost:5000/api',
 });
 
+
+
+
 // Attach token automatically
-API.interceptors.request.use((req) =>{
-    const user = JSON.parse(localStorage.getItem('user'));
+API.interceptors.request.use((req) => {
 
-    if(user?.token){
-        req.headers.Authorization = `Bearer ${user.token}`;
-    }
+  const user = JSON.parse(
+    localStorage.getItem('user')
+  );
 
-    return req;
+  if (user?.token) {
+    req.headers.Authorization =
+      `Bearer ${user.token}`;
+  }
+
+  return req;
 });
 
 export default API;
